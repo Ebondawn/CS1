@@ -1,4 +1,7 @@
 //Assignment 4B Jared Burks
+//This program allows the user to select between Addition, Subtraction,
+//Multiplication, and Division; provides a random problem, and checks
+//for the correct solution
 
 #include <iostream>
 #include <cstdlib> // For rand and srand
