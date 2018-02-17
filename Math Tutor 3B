@@ -1,1 +1,95 @@
+//Assignment 4B Jared Burks
+
+#include <iostream>
+#include <cstdlib> // For rand and srand
+#include <ctime>   // For the time function
+#include <iomanip>
+#include <cmath> // For the round function
+using namespace std;
+
+int main()
+{
+    int menuChoice = 0; // Determines the type of calculation to be performed
+    char type = '+';
+    while(true)
+    {
+        cout << "Main Menu - Please Make a Selection" << endl << endl;
+        cout << "1 - Addition\n2 - Subtraction\n3 - Multiplication\n4 - Division\n5 - Exit Program" << endl << endl;
+        cin >> menuChoice;
+        cout << endl;
+    
+        // Sets the type variable to the operator chosen by the user
+        switch(menuChoice)
+            {
+                case 5 : cout << "\nExiting Program..." << endl << endl; return 0;
+                case 1 : type = '+'; break;
+                case 2 : type = '-'; break;
+                case 3 : type = 'x'; break;
+                case 4 : type = '/'; break;
+                default: cout << "Invalid Selection\n\n"; continue;
+            }
+        // Variables
+        float guess = 0;
+        float result = 0;
+    	// Constants
+    	const int MIN = 50;
+    	const int MAX = 450;
+    
+    	// Get the system time.
+    	unsigned seed = time(0);
+    
+    	// Seed the random number generator.
+    	srand(seed);
+    
+    	// Generate two random numbers.
+    	int num1 = MIN + rand() % MAX;
+    	int num2 = MIN + rand() % MAX;
+    
+    	// Display the problem, horizontally if Division, vertically otherwise
+    	if (menuChoice == 4)
+    	    cout << setw(5) << num1 << " / " << num2 << " = " << endl;
+    	else
+    	    {
+    	cout << setw(5) << num1 << endl
+             << type << setw(4) << num2 << endl
+             << "-----\n\n";
+    	    }
+    	// Wait for the user to press the Enter key.
+    	if (menuChoice == 4)
+    	    cout << "Enter the solution rounded to the nearest hundredth" << endl;
+    	else
+    	    cout << "Enter the solution" << endl;
+    	cin >> guess;
+    
+    	// Calculate the result.
+    	switch(type)
+    	    {
+    	        case '+' : result = num1 + num2; break;
+    	        case '-' : result = num1 - num2; break;
+    	        case 'x' : result = num1 * num2; break;
+    	        case '/' : result = static_cast<float>(num1) / num2; break;
+    	        default  : result = num1 + num2;
+    	    }
+    	if (guess == round (result * 100) / 100) // rounds the result float variable to the nearest hundreth
+        {
+            cout << "Congratulations, you are correct!" << endl;
+        }
+        else
+        {
+        cout << "Incorrect, the correct answer is : \n" << endl;
+            if (menuChoice == 4)
+    	        cout << setw(5) << num1 << " / " << num2 << " = " << round (result * 100) / 100 << endl;
+    	   else
+    	   {
+    	        cout << setw(5) << num1 << endl
+                << type << setw(4) << num2 << endl
+                << "-----\n"
+                << setw(5) << result << endl << endl;
+    	   }
+        }
+    }
+	return 0;
+}
+
+
 
